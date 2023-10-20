@@ -2,7 +2,7 @@
 pub mod day_1 {
     use std::error::Error;
 
-    pub fn calorie_counting_part_one(file: String) -> Result<i32, Box<dyn Error>> {
+    pub fn calorie_counting_part_one(file: &str) -> Result<i32, Box<dyn Error>> {
         let contents = std::fs::read_to_string(file)?;
 
         let mut max_calories = 0;
