@@ -99,7 +99,69 @@ pub mod day_1 {
 }
 
 pub mod day_2 {
+    use std::{
+        fs::File,
+        io::{self, BufRead, BufReader},
+    };
 
+    enum PlayTypes {
+        OpponentRock,
+        OpponentPaper,
+        OpponentScissors,
+        ResponseRock,
+        ResponsePaper,
+        ResponseScissors
+    }
+
+    struct OpponentRock<'a> {
+        symbol: &'a str,
+        value: i8,
+    }
+    struct OpponentPaper<'a> {
+        symbol: &'a str,
+        value: i8,
+    }
+    struct OpponentScissors<'a> {
+        symbol: &'a str,
+        value: i8,
+    }
+
+    struct ResponseRock<'a> {
+        symbol: &'a str,
+        value: i8,
+    }
+    struct ResponsePaper<'a> {
+        symbol: &'a str,
+        value: i8,
+    }
+    struct ResponseScissors<'a> {
+        symbol: &'a str,
+        value: i8,
+    }
+
+    pub fn parse_play<'a>(play_types: PlayTypes) -> PlayTypes {
+        let play_types = match play_types {
+            PlayTypes::OpponentRock => OpponentRock { symbol: "", value: 3 },
+            PlayTypes::OpponentPaper => OpponentPaper { symbol: "", value: 2 },
+            PlayTypes::OpponentScissors => OpponentScissors { symbol: "", value: 1},
+            PlayTypes::PlayerRock => ResponseRock { symbol: "", value: 3 },
+            PlayTypes::PlayerPaper => ResponsePaper{ symbol: "", value: 2 },
+            PlayTypes::PlayerScissors => ResponseScissors { symbol: "", value: 1},
+        };
+
+        play_types
+    }
+
+    pub fn rock_paper_scissors(file_path: &str) -> io::Result<()> {
+        let f = File::open(file_path)?;
+        let f = BufReader::new(f);
+
+        for line in f.lines() {
+            println!("{}", line.unwrap());
+        }
+
+        Ok(())
+    }
 }
 
 #[cfg(test)]
