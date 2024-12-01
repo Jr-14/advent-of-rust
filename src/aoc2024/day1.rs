@@ -37,19 +37,11 @@ pub fn calculate_similarity_score(contents: &str) -> Result<i32, Box<dyn Error>>
         let right_dist: i32 = v[1].parse()?;
         left_locations.push(left_dist); 
 
-        locations.insert(right_dist, 0);
-    }
-
-    for loc in &left_locations {
-        match locations.get(&loc) {
-            Some(count) => {
-                println!("Found {:?} with count - {:?}", loc, count);
-                locations.insert(*loc, count + 1);
-            },
-            None => ()
+        match locations.get(&right_dist) {
+            Some(count) => locations.insert(right_dist, count + 1),
+            None => locations.insert(right_dist, 1)
         };
     }
-    println!("{:?}", locations);
 
     let mut similarity_score = 0;
     for loc in left_locations {
@@ -73,7 +65,7 @@ pub fn run_day_1_part_1() {
         Err(error) => panic!("Problem running AoC 2024 Day 1 - {:?}", error)
     };
 
-    println!("AoC Day 1 Part 1 answer is {:?}", distance);
+    println!("AoC 2024 Day 1 Part 1 answer is {:?}", distance);
 }
 
 pub fn run_day_1_part_2() {
@@ -87,5 +79,5 @@ pub fn run_day_1_part_2() {
         Err(error) => panic!("Problem running AoC 2024 Day 1 part 2 - {:?}", error)
     };
 
-    println!("AoC Day 1 Part 2 answer is {:?}", similarity_score);
+    println!("AoC 2024 Day 1 Part 2 answer is {:?}", similarity_score);
 }
