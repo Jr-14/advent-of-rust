@@ -1,5 +1,6 @@
-use advent_of_rust::aoc2023;
+use advent_of_rust::aoc2024;
 
 fn main() {
-    aoc2023::day1::run_part_one();
+    aoc2024::day1::run_day_1_part_1();
+    aoc2024::day1::run_day_1_part_2();
 }
